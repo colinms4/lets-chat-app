@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, ImageBackground, TouchableOpacity, Button } from 'react-native';
 
-const Screen1 = ({ navigation }) => {
+const Start = ({ navigation }) => {
     const [name, setName] = useState("");
     const [backgroundColor, setBackgroundColor] = useState(null); // Track selected color
     const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
@@ -22,6 +22,10 @@ const Screen1 = ({ navigation }) => {
                 <View style={styles.colorContainer}>
                     {colors.map((color) => (
                         <TouchableOpacity
+                            accessible={true}
+                            accessibilityLabel='More options'
+                            accessibilityHint='Lets you choose to send an image or your geolocation.'
+                            accessibilityRole='button'
                             key={color}
                             style={[
                                 styles.colorOption,
@@ -32,9 +36,9 @@ const Screen1 = ({ navigation }) => {
                     ))}
                 </View>
                 <Button
-                    title="Go to Screen 2"
+                    title="Go to Chat"
                     onPress={() =>
-                        navigation.navigate('Screen2', { backgroundColor, name })
+                        navigation.navigate('Chat', { backgroundColor, name })
                     }
                     disabled={!backgroundColor} // Disable button if no color is selected
                 />
@@ -80,4 +84,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Screen1;
+export default Start;
