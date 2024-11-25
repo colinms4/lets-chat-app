@@ -1,10 +1,33 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, ImageBackground, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ImageBackground, TouchableOpacity, Button, Alert } from 'react-native';
+import { getAuth, signInAnonymously } from 'firebase/auth';
 
 const Start = ({ navigation }) => {
     const [name, setName] = useState("");
     const [backgroundColor, setBackgroundColor] = useState(null); // Track selected color
     const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
+
+    const auth = getAuth();
+
+    const signInUser = () => {
+        if (!name.trim()) {
+            Alert.alert("Please enter your username!");
+            return;
+        }
+        if (!backgroundColor) {
+            Alert.alert("Please select a background color!");
+            return;
+        }
+        signInAnonymously(auth)
+            .then(result => {
+                navigation.navigate("Chat", { userID: result.user.uid, backgroundColor, name });
+                Alert.alert("Signed in Successfully!");
+            })
+            .catch((error) => {
+                Alert.alert("Unable to sign in, please try again later.");
+            });
+    };
+
 
     return (
         <View style={styles.container}>
@@ -37,9 +60,7 @@ const Start = ({ navigation }) => {
                 </View>
                 <Button
                     title="Go to Chat"
-                    onPress={() =>
-                        navigation.navigate('Chat', { backgroundColor, name })
-                    }
+                    onPress={signInUser}
                     disabled={!backgroundColor} // Disable button if no color is selected
                 />
             </ImageBackground>
