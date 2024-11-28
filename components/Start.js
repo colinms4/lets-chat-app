@@ -9,6 +9,7 @@ const Start = ({ navigation }) => {
 
     const auth = getAuth();
 
+    // lets a user sign in anonymously 
     const signInUser = () => {
         if (!name.trim()) {
             Alert.alert("Please enter your username!");
