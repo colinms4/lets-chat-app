@@ -17,6 +17,7 @@ provide users with a chat interface and options to share images and their locati
 2. Install dependencies ```npm install ``` and ``` npm install -g expo-cli ``` 
 3. Configure Firebase
 Make sure to use your Firebase configurations in App.js. Create a new project on Firebase, add a web application and copy your firebase credentials.
+```
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_AUTH_DOMAIN",
@@ -25,6 +26,7 @@ const firebaseConfig = {
     messagingSenderId: "YOUR_ID",
     appId: "YOUR_APP_ID"
   };
+```
 4. Run your app locally with ``` npm start ``` 
 5. Open up your Expo Go app or use Andriod Studio Emulator 
 
